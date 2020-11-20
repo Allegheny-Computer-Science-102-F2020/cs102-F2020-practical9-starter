@@ -1,0 +1,71 @@
+---
+name: cs102-F2020-practical9
+break: true
+indent: 4
+---
+
+# Learn more about GatorGrader and its supported checks by visiting this web site:
+# https://github.com/GatorEducator/gatorgrader
+
+# Explanation:
+# --> a check without an "--exact" runs a count for an entity as an "at least"
+# --> checks below a file in a specified directory are for that specific file and directory
+# --> checks that appear stand-alone are for an entire Git repository
+
+# --> check the Python program
+scheduler/scheduler/__main__.py:
+    ConfirmFileExists
+    MatchFileFragment --fragment "TODO" --count 0 --exact
+    MatchFileFragment --fragment "from scheduler import schedule" --count 1 --exact
+    CountMultipleLineComments --language Python --count 2
+    CountSingleLineComments --language Python --count 4
+
+# --> check the Python program
+scheduler/scheduler/schedule.py:
+    ConfirmFileExists
+    MatchFileFragment --fragment "TODO" --count 0 --exact
+    MatchFileFragment --fragment "from collections import OrderedDict" --count 1 --exact
+    CountMultipleLineComments --language Python --count 2
+    CountSingleLineComments --language Python --count 8
+
+# --> confirm that the graphic exists
+diagrams/memory-graph.png:
+    ConfirmFileExists
+
+# --> check the technical writing for various characteristics
+writing/reflection.md:
+    ConfirmFileExists
+    CountFileWords --count 400
+    CountMarkdownTags --tag "heading" --count 6 --exact
+    CountMarkdownTags --tag "code" --count 1
+    CountMarkdownTags --tag "code_block" --count 1
+    MatchFileFragment --fragment "TODO" --count 0 --exact
+    MatchFileFragment --fragment "Add Your Name Here" --count 0 --exact
+
+# --> check that the number of commits in the Git repository is beyond a threshold
+CountCommits --count 5
+
+# --> check that the program executes correctly
+ExecuteCommand --command "cd scheduler; poetry install; poetry run python scheduler --depth 3; cd .."
+
+# Output of the Python Program:
+
+# Monday:
+
+#         CMPSC 102 that starts at 10:20:00 and ends at 11:10:00 and is taught by Kapfhammer
+
+# Wednesday:
+
+#         CMPSC 102 that starts at 10:20:00 and ends at 11:10:00 and is taught by Kapfhammer
+
+# Friday:
+
+#         CMPSC 102 that starts at 10:20:00 and ends at 11:10:00 and is taught by Kapfhammer
+
+# Tuesday:
+
+#         CMPSC 302 that starts at 09:35:00 and ends at 10:50:00 and is taught by Kapfhammer
+
+# Thursday:
+
+#         CMPSC 302 that starts at 09:35:00 and ends at 10:50:00 and is taught by Kapfhammer
